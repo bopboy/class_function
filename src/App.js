@@ -25,6 +25,7 @@ function FuncComp(p) {
         ++funcId,
       funcStyle
     );
+    document.title = number;
     return function() {
       console.log(
         "%cfunc => useEffect return (componentDidMount & componentDidUpdate) " +
@@ -32,7 +33,43 @@ function FuncComp(p) {
         funcStyle
       );
     };
-  });
+  }, []);
+  useEffect(
+    function() {
+      console.log(
+        "%cfunc => useEffect number (== componentDidMount & componentDidUpdate) " +
+          ++funcId,
+        funcStyle
+      );
+      document.title = number;
+      return function() {
+        console.log(
+          "%cfunc => useEffect return number (componentDidMount & componentDidUpdate) " +
+            ++funcId,
+          funcStyle
+        );
+      };
+    },
+    [number]
+  );
+  useEffect(
+    function() {
+      console.log(
+        "%cfunc => useEffect date (== componentDidMount & componentDidUpdate) " +
+          ++funcId,
+        funcStyle
+      );
+      document.title = _date;
+      return function() {
+        console.log(
+          "%cfunc => useEffect return date (componentDidMount & componentDidUpdate) " +
+            ++funcId,
+          funcStyle
+        );
+      };
+    },
+    [_date]
+  );
   console.log("%cfunc => render" + ++funcId, funcStyle);
   return (
     <div className="container">
