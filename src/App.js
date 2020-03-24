@@ -21,10 +21,17 @@ function FuncComp(p) {
   var [_date, setDate] = useState(new Date().toString());
   useEffect(function() {
     console.log(
-      "%cfunc => useEffect (== componentDidMount & componentDidUpdate" +
+      "%cfunc => useEffect (== componentDidMount & componentDidUpdate) " +
         ++funcId,
       funcStyle
     );
+    return function() {
+      console.log(
+        "%cfunc => useEffect return (componentDidMount & componentDidUpdate) " +
+          ++funcId,
+        funcStyle
+      );
+    };
   });
   console.log("%cfunc => render" + ++funcId, funcStyle);
   return (
